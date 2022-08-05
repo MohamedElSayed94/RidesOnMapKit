@@ -9,13 +9,24 @@
 /* Begin PBXBuildFile section */
 		FA6C67D0289AB2AD001AE6CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67CF289AB2AD001AE6CC /* AppDelegate.swift */; };
 		FA6C67D2289AB2AD001AE6CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67D1289AB2AD001AE6CC /* SceneDelegate.swift */; };
-		FA6C67D4289AB2AD001AE6CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67D3289AB2AD001AE6CC /* ViewController.swift */; };
-		FA6C67D7289AB2AD001AE6CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6C67D5289AB2AD001AE6CC /* Main.storyboard */; };
 		FA6C67D9289AB2AF001AE6CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6C67D8289AB2AF001AE6CC /* Assets.xcassets */; };
 		FA6C67DC289AB2AF001AE6CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6C67DA289AB2AF001AE6CC /* LaunchScreen.storyboard */; };
 		FA6C67E7289AB2AF001AE6CC /* TIERMobilityTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67E6289AB2AF001AE6CC /* TIERMobilityTaskTests.swift */; };
 		FA6C67F1289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67F0289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift */; };
 		FA6C67F3289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67F2289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift */; };
+		FA6C6801289AB2EB001AE6CC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C6800289AB2EB001AE6CC /* MapViewController.swift */; };
+		FA6C6804289AB3E5001AE6CC /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */; };
+		FAC1FA5A289BC0BB00C2915A /* FailableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA59289BC0BB00C2915A /* FailableProtocol.swift */; };
+		FAC1FA5D289BC26A00C2915A /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA5C289BC26A00C2915A /* ErrorTypes.swift */; };
+		FAC1FA5F289BC91C00C2915A /* LoadableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA5E289BC91C00C2915A /* LoadableProtocol.swift */; };
+		FAC1FA62289BCACE00C2915A /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA61289BCACE00C2915A /* SpinnerViewController.swift */; };
+		FAC1FA66289BCE8D00C2915A /* MapDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA65289BCE8D00C2915A /* MapDataRepository.swift */; };
+		FAC1FA6C289BD2DA00C2915A /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA6B289BD2DA00C2915A /* MapService.swift */; };
+		FAC1FA6E289BD38F00C2915A /* Constance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA6D289BD38F00C2915A /* Constance.swift */; };
+		FAC1FA70289BE6F100C2915A /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA6F289BE6F100C2915A /* NetworkConfiguration.swift */; };
+		FAC1FA74289BF75700C2915A /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA73289BF75700C2915A /* ScooterModel.swift */; };
+		FAC1FA76289C183300C2915A /* ScooterMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA75289C183300C2915A /* ScooterMarker.swift */; };
+		FAC1FA79289C96E200C2915A /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +50,6 @@
 		FA6C67CC289AB2AD001AE6CC /* TIERMobilityTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIERMobilityTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6C67CF289AB2AD001AE6CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6C67D1289AB2AD001AE6CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FA6C67D3289AB2AD001AE6CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FA6C67D6289AB2AD001AE6CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA6C67D8289AB2AF001AE6CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6C67DB289AB2AF001AE6CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6C67DD289AB2AF001AE6CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +58,19 @@
 		FA6C67EC289AB2AF001AE6CC /* TIERMobilityTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TIERMobilityTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6C67F0289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIERMobilityTaskUITests.swift; sourceTree = "<group>"; };
 		FA6C67F2289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIERMobilityTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FA6C6800289AB2EB001AE6CC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		FAC1FA59289BC0BB00C2915A /* FailableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableProtocol.swift; sourceTree = "<group>"; };
+		FAC1FA5C289BC26A00C2915A /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
+		FAC1FA5E289BC91C00C2915A /* LoadableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableProtocol.swift; sourceTree = "<group>"; };
+		FAC1FA61289BCACE00C2915A /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		FAC1FA65289BCE8D00C2915A /* MapDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataRepository.swift; sourceTree = "<group>"; };
+		FAC1FA6B289BD2DA00C2915A /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		FAC1FA6D289BD38F00C2915A /* Constance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constance.swift; sourceTree = "<group>"; };
+		FAC1FA6F289BE6F100C2915A /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
+		FAC1FA73289BF75700C2915A /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
+		FAC1FA75289C183300C2915A /* ScooterMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterMarker.swift; sourceTree = "<group>"; };
+		FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +121,14 @@
 		FA6C67CE289AB2AD001AE6CC /* TIERMobilityTask */ = {
 			isa = PBXGroup;
 			children = (
+				FAC1FA77289C96CD00C2915A /* Extensions */,
+				FAC1FA6A289BD29700C2915A /* Services */,
+				FAC1FA63289BCC9D00C2915A /* DataRepositories */,
+				FAC1FA5B289BC23E00C2915A /* GeneralModels */,
+				FAC1FA58289BBE5F00C2915A /* Protocols */,
+				FAC1FA57289BBE4F00C2915A /* Modules */,
 				FA6C67CF289AB2AD001AE6CC /* AppDelegate.swift */,
 				FA6C67D1289AB2AD001AE6CC /* SceneDelegate.swift */,
-				FA6C67D3289AB2AD001AE6CC /* ViewController.swift */,
-				FA6C67D5289AB2AD001AE6CC /* Main.storyboard */,
 				FA6C67D8289AB2AF001AE6CC /* Assets.xcassets */,
 				FA6C67DA289AB2AF001AE6CC /* LaunchScreen.storyboard */,
 				FA6C67DD289AB2AF001AE6CC /* Info.plist */,
@@ -125,6 +151,85 @@
 				FA6C67F2289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift */,
 			);
 			path = TIERMobilityTaskUITests;
+			sourceTree = "<group>";
+		};
+		FA6C67FF289AB2B9001AE6CC /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				FA6C6800289AB2EB001AE6CC /* MapViewController.swift */,
+				FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */,
+				FAC1FA73289BF75700C2915A /* ScooterModel.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		FAC1FA57289BBE4F00C2915A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA60289BCAB100C2915A /* SpinnerLoadingView */,
+				FA6C67FF289AB2B9001AE6CC /* Map */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		FAC1FA58289BBE5F00C2915A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA59289BC0BB00C2915A /* FailableProtocol.swift */,
+				FAC1FA5E289BC91C00C2915A /* LoadableProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FAC1FA5B289BC23E00C2915A /* GeneralModels */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA5C289BC26A00C2915A /* ErrorTypes.swift */,
+				FAC1FA6D289BD38F00C2915A /* Constance.swift */,
+				FAC1FA6F289BE6F100C2915A /* NetworkConfiguration.swift */,
+				FAC1FA75289C183300C2915A /* ScooterMarker.swift */,
+			);
+			path = GeneralModels;
+			sourceTree = "<group>";
+		};
+		FAC1FA60289BCAB100C2915A /* SpinnerLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA61289BCACE00C2915A /* SpinnerViewController.swift */,
+			);
+			path = SpinnerLoadingView;
+			sourceTree = "<group>";
+		};
+		FAC1FA63289BCC9D00C2915A /* DataRepositories */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA64289BCCA600C2915A /* MapDataRepository */,
+			);
+			path = DataRepositories;
+			sourceTree = "<group>";
+		};
+		FAC1FA64289BCCA600C2915A /* MapDataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA65289BCE8D00C2915A /* MapDataRepository.swift */,
+			);
+			path = MapDataRepository;
+			sourceTree = "<group>";
+		};
+		FAC1FA6A289BD29700C2915A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA6B289BD2DA00C2915A /* MapService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FAC1FA77289C96CD00C2915A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +338,6 @@
 			files = (
 				FA6C67DC289AB2AF001AE6CC /* LaunchScreen.storyboard in Resources */,
 				FA6C67D9289AB2AF001AE6CC /* Assets.xcassets in Resources */,
-				FA6C67D7289AB2AD001AE6CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +362,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6C67D4289AB2AD001AE6CC /* ViewController.swift in Sources */,
+				FAC1FA79289C96E200C2915A /* MKMapViewExtension.swift in Sources */,
+				FAC1FA6C289BD2DA00C2915A /* MapService.swift in Sources */,
+				FAC1FA66289BCE8D00C2915A /* MapDataRepository.swift in Sources */,
+				FAC1FA6E289BD38F00C2915A /* Constance.swift in Sources */,
+				FAC1FA76289C183300C2915A /* ScooterMarker.swift in Sources */,
+				FAC1FA5A289BC0BB00C2915A /* FailableProtocol.swift in Sources */,
+				FAC1FA5F289BC91C00C2915A /* LoadableProtocol.swift in Sources */,
+				FAC1FA74289BF75700C2915A /* ScooterModel.swift in Sources */,
+				FA6C6804289AB3E5001AE6CC /* MapViewModel.swift in Sources */,
+				FAC1FA70289BE6F100C2915A /* NetworkConfiguration.swift in Sources */,
+				FAC1FA62289BCACE00C2915A /* SpinnerViewController.swift in Sources */,
 				FA6C67D0289AB2AD001AE6CC /* AppDelegate.swift in Sources */,
 				FA6C67D2289AB2AD001AE6CC /* SceneDelegate.swift in Sources */,
+				FAC1FA5D289BC26A00C2915A /* ErrorTypes.swift in Sources */,
+				FA6C6801289AB2EB001AE6CC /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +413,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FA6C67D5289AB2AD001AE6CC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA6C67D6289AB2AD001AE6CC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FA6C67DA289AB2AF001AE6CC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -439,11 +547,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TIERMobilityTask/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,11 +576,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TIERMobilityTask/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
