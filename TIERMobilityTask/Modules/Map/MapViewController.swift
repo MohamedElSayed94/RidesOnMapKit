@@ -15,14 +15,16 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     var topBannerErrorView: UIView = UIView()
+    var bottomSheetViewController: HomeBottomSheetViewController
     var loadingViewController: UIViewController = SpinnerViewController()
     var mapView: MKMapView
     
     var viewModel: MapViewModelProtocol
     let locationManager = CLLocationManager()
     
-    init(viewModel: MapViewModelProtocol = MapViewModel()) {
+    init(viewModel: MapViewModelProtocol = MapViewModel(), bottomSheetViewController: HomeBottomSheetViewController = HomeBottomSheetViewController()) {
         self.viewModel = viewModel
+        self.bottomSheetViewController = bottomSheetViewController
         self.mapView = MKMapView()
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,7 +61,9 @@ class MapViewController: UIViewController {
             }
         }
         viewModel.getNearScooters()
-        
+    }
+    
+    func displayBottomSheet() {
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -122,8 +126,11 @@ class MapViewController: UIViewController {
     }
     func selectNearestScooter() {
         self.selectNearestScooterMarker { [weak self] scooterMarker in
-            guard let self = self, let coordinate = scooterMarker?.coordinate else { return }
-            self.drawRoute(distenation: coordinate)
+            guard let self = self, let scooterMarker = scooterMarker else { return }
+            self.drawRoute(distenation: scooterMarker.coordinate)
+            self.showBottomSheet()
+            self.bottomSheetViewController.loadScooterData(scooterMarker.scooterlayoutVM)
+            
         }
     }
     
@@ -172,14 +179,15 @@ class MapViewController: UIViewController {
         let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 50000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
         self.view.addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7).isActive = true
+//        mapView.translatesAutoresizingMaskIntoConstraints = false
+//        mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+//        mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+//        mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+//        mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7).isActive = true
+        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
     }
     
-    func addScootersToMap(scooters: [ScooterModel]) {
+    func addScootersToMap(scooters: [ScooterMarkerLayoutViewModel]) {
         let markers: [ScooterMarker] = scooters.compactMap {ScooterMarker(scooter: $0)}
         mapView.addAnnotations(markers)
         
@@ -199,7 +207,40 @@ extension MapViewController: LoadableProtocol  {
 }
 
 
-
+extension MapViewController {
+    
+    func showBottomSheet() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.addChild(self.bottomSheetViewController)
+            self.view.addSubview(self.bottomSheetViewController.view)
+            self.bottomSheetViewController.didMove(toParent: self)
+            let height = self.view.frame.height
+            let width  = self.view.frame.width
+            self.bottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+            
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                guard let self = self else { return }
+                let frame = self.bottomSheetViewController.view.frame
+                let yComponent = self.mapView.frame.height * 0.7 - 50
+                let newHeight = height - yComponent
+                self.bottomSheetViewController.view.frame = CGRect(x: 0, y: yComponent, width: frame.width, height: newHeight)
+                
+                self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.7)
+            }
+        }
+        
+    }
+    
+    func hideBottomSheet() {
+        bottomSheetViewController.willMove(toParent: nil)
+        bottomSheetViewController.view.removeFromSuperview()
+        bottomSheetViewController.removeFromParent()
+    }
+    
+    
+    
+}
 
 
 
@@ -227,9 +268,16 @@ extension MapViewController: MKMapViewDelegate {
         guard let scooter = view.annotation as? ScooterMarker else {
             return
           }
-        mapView.removeOverlays(mapView.overlays)
-        drawRoute(distenation: scooter.coordinate)
-          print(scooter)
+        showLoadingView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else { return }
+            self.mapView.removeOverlays(self.mapView.overlays)
+            self.drawRoute(distenation: scooter.coordinate)
+              print(scooter)
+            self.bottomSheetViewController.loadScooterData(scooter.scooterlayoutVM)
+            self.hideLoadingView()
+        }
+        
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 

@@ -9,7 +9,7 @@ import Foundation
 
 enum State {
     case loading(Bool)
-    case recievedData([ScooterModel])
+    case recievedData([ScooterMarkerLayoutViewModel])
     case empty
     case error(Errortypes)
 }
@@ -18,13 +18,13 @@ protocol MapViewModelProtocol {
     var onLoading: ((_ isLoading: Bool) -> Void)? { get set }
     var onEmptyState: (() -> Void)? { get set }
     var onError: ((Errortypes) -> Void)? {get set }
-    var onRecieveData: (([ScooterModel]) -> Void)? { get set }
+    var onRecieveData: (([ScooterMarkerLayoutViewModel]) -> Void)? { get set }
     var currentState: ((State)->Void)? {get set}
     func getNearScooters()
 }
 
 class MapViewModel: MapViewModelProtocol {
-    var onRecieveData: (([ScooterModel]) -> Void)?
+    var onRecieveData: (([ScooterMarkerLayoutViewModel]) -> Void)?
 
     var onLoading: ((Bool) -> Void)?
     var onEmptyState: (() -> Void)?
@@ -50,7 +50,8 @@ class MapViewModel: MapViewModelProtocol {
                     if scooters.isEmpty {
                         self.currentState?(.empty)
                     } else {
-                        self.currentState?(.recievedData(scooters))
+                        let layoutViewModel = scooters.map { ScooterMarkerLayoutViewModel($0) }
+                        self.currentState?(.recievedData(layoutViewModel))
                     }
                     
                     

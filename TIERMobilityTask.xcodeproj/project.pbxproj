@@ -27,6 +27,9 @@
 		FAC1FA74289BF75700C2915A /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA73289BF75700C2915A /* ScooterModel.swift */; };
 		FAC1FA76289C183300C2915A /* ScooterMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA75289C183300C2915A /* ScooterMarker.swift */; };
 		FAC1FA79289C96E200C2915A /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */; };
+		FAC1FA7B289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */; };
+		FAC1FA7E289DDCC800C2915A /* HomeBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */; };
+		FAC1FA80289DE99300C2915A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		FAC1FA73289BF75700C2915A /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
 		FAC1FA75289C183300C2915A /* ScooterMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterMarker.swift; sourceTree = "<group>"; };
 		FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
+		FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterMarkerLayoutViewModel.swift; sourceTree = "<group>"; };
+		FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetViewController.swift; sourceTree = "<group>"; };
+		FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,7 @@
 				FA6C6800289AB2EB001AE6CC /* MapViewController.swift */,
 				FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */,
 				FAC1FA73289BF75700C2915A /* ScooterModel.swift */,
+				FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -166,6 +173,7 @@
 		FAC1FA57289BBE4F00C2915A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				FAC1FA7C289DDC9500C2915A /* BottomSheet */,
 				FAC1FA60289BCAB100C2915A /* SpinnerLoadingView */,
 				FA6C67FF289AB2B9001AE6CC /* Map */,
 			);
@@ -228,8 +236,17 @@
 			isa = PBXGroup;
 			children = (
 				FAC1FA78289C96E200C2915A /* MKMapViewExtension.swift */,
+				FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FAC1FA7C289DDC9500C2915A /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,15 +381,18 @@
 			files = (
 				FAC1FA79289C96E200C2915A /* MKMapViewExtension.swift in Sources */,
 				FAC1FA6C289BD2DA00C2915A /* MapService.swift in Sources */,
+				FAC1FA80289DE99300C2915A /* UIViewControllerExtension.swift in Sources */,
 				FAC1FA66289BCE8D00C2915A /* MapDataRepository.swift in Sources */,
 				FAC1FA6E289BD38F00C2915A /* Constance.swift in Sources */,
 				FAC1FA76289C183300C2915A /* ScooterMarker.swift in Sources */,
 				FAC1FA5A289BC0BB00C2915A /* FailableProtocol.swift in Sources */,
 				FAC1FA5F289BC91C00C2915A /* LoadableProtocol.swift in Sources */,
 				FAC1FA74289BF75700C2915A /* ScooterModel.swift in Sources */,
+				FAC1FA7B289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift in Sources */,
 				FA6C6804289AB3E5001AE6CC /* MapViewModel.swift in Sources */,
 				FAC1FA70289BE6F100C2915A /* NetworkConfiguration.swift in Sources */,
 				FAC1FA62289BCACE00C2915A /* SpinnerViewController.swift in Sources */,
+				FAC1FA7E289DDCC800C2915A /* HomeBottomSheetViewController.swift in Sources */,
 				FA6C67D0289AB2AD001AE6CC /* AppDelegate.swift in Sources */,
 				FA6C67D2289AB2AD001AE6CC /* SceneDelegate.swift in Sources */,
 				FAC1FA5D289BC26A00C2915A /* ErrorTypes.swift in Sources */,
