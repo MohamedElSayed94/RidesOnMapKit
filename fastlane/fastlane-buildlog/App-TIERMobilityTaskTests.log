@@ -1,0 +1,7 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -scheme TIERMobilityTaskTests -project ./TIERMobilityTask.xcodeproj -derivedDataPath "~/Library/Developer/Xcode/DerivedData" -destination "platform=iOS Simulator,id=D047EB1C-5CC8-4759-A84C-95E2EDE889AC" build test
+
+User defaults from command line:
+    IDEDerivedDataPathOverride = /Users/mohamedelsayed/Library/Developer/Xcode/DerivedData
+    IDEPackageSupportUseBuiltinSCM = YES
+

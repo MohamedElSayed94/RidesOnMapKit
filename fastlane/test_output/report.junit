@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='TIERMobilityTaskTests.xctest' tests='2' failures='0'>
+  <testsuite name='TIERMobilityTaskTests.TIERMobilityTaskTests' tests='2' failures='0'>
+    <testcase classname='TIERMobilityTaskTests.TIERMobilityTaskTests' name='testExample' time='0.003'/>
+    <testcase classname='TIERMobilityTaskTests.TIERMobilityTaskTests' name='testPerformanceExample' time='0.301'/>
+  </testsuite>
+</testsuites>

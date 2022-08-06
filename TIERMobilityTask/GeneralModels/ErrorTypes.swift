@@ -10,6 +10,7 @@ import Foundation
 
 enum Errortypes: Error {
     case network
-    case APIError
-    case DecodeError
+    case APIError(String?)
+    case DecodeError(String?)
+    case GeneralError(String?)
 }

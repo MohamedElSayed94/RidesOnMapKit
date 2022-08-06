@@ -30,6 +30,7 @@
 		FAC1FA7B289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */; };
 		FAC1FA7E289DDCC800C2915A /* HomeBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */; };
 		FAC1FA80289DE99300C2915A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */; };
+		FACD6260289EB7D300C9762A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD625F289EB7D300C9762A /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterMarkerLayoutViewModel.swift; sourceTree = "<group>"; };
 		FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetViewController.swift; sourceTree = "<group>"; };
 		FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FACD625F289EB7D300C9762A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				FAC1FA6D289BD38F00C2915A /* Constance.swift */,
 				FAC1FA6F289BE6F100C2915A /* NetworkConfiguration.swift */,
 				FAC1FA75289C183300C2915A /* ScooterMarker.swift */,
+				FACD625F289EB7D300C9762A /* NetworkMonitor.swift */,
 			);
 			path = GeneralModels;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				FAC1FA7E289DDCC800C2915A /* HomeBottomSheetViewController.swift in Sources */,
 				FA6C67D0289AB2AD001AE6CC /* AppDelegate.swift in Sources */,
 				FA6C67D2289AB2AD001AE6CC /* SceneDelegate.swift in Sources */,
+				FACD6260289EB7D300C9762A /* NetworkMonitor.swift in Sources */,
 				FAC1FA5D289BC26A00C2915A /* ErrorTypes.swift in Sources */,
 				FA6C6801289AB2EB001AE6CC /* MapViewController.swift in Sources */,
 			);
@@ -563,8 +567,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 68T5M83787;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TIERMobilityTask/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
@@ -581,6 +587,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MoSayed.TIERMobilityTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -592,8 +599,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 68T5M83787;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TIERMobilityTask/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TIER wants to access your location to provide you full feature";
@@ -610,6 +619,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MoSayed.TIERMobilityTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

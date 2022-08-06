@@ -27,7 +27,7 @@ class MapService {
                 response.statusCode == 200,
                 error == nil
             else {
-                completion(.failure(Errortypes.APIError))
+                completion(.failure(Errortypes.APIError(error?.localizedDescription)))
                 return
             }
             
@@ -36,7 +36,7 @@ class MapService {
                 completion(.success(decodedData.data ?? []))
             } catch let err {
                 print("Failed to decode JSON \(err)")
-                completion(.failure(Errortypes.DecodeError))
+                completion(.failure(Errortypes.DecodeError(error?.localizedDescription)))
             }
             
         }

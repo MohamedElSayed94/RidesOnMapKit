@@ -14,13 +14,20 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
+    // MARK: - Variables
+    
     var topBannerErrorView: UIView = UIView()
+    let emptyStateView = UIView()
     var bottomSheetViewController: HomeBottomSheetViewController
     var loadingViewController: UIViewController = SpinnerViewController()
     var mapView: MKMapView
-    
     var viewModel: MapViewModelProtocol
     let locationManager = CLLocationManager()
+    
+    
+    
+    
+    // MARK: - Init
     
     init(viewModel: MapViewModelProtocol = MapViewModel(), bottomSheetViewController: HomeBottomSheetViewController = HomeBottomSheetViewController()) {
         self.viewModel = viewModel
@@ -31,6 +38,7 @@ class MapViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -50,32 +58,43 @@ class MapViewController: UIViewController {
                     }
                 case .recievedData(let scooters):
                     print(scooters.count)
+                    self.hideEmptyStateBanner()
                     self.addScootersToMap(scooters: scooters)
                     self.selectNearestScooter()
                     
                 case .empty:
                     print("Empty")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.showEmptyStateBanner()
+                    }
+                    
                 case .error(let error):
                     self.showError(error: error)
                 }
             }
         }
         viewModel.getNearScooters()
-    }
-    
-    func displayBottomSheet() {
         
+        NetworkMonitor.shared.startMonitoring()
+        NotificationCenter.default.addObserver(self, selector: #selector(appBecomeActive), name: NSNotification.Name(rawValue: "connectionType"), object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    deinit {
+        NetworkMonitor.shared.stopMonitoring()
+    }
+    // MARK: - Location Methods
+    
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
+    
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
-           setupLocationManager()
+            setupLocationManager()
             checkLocationAuth()
         } else {
             print("Alert To let user know that they have to turn this on")
@@ -104,6 +123,27 @@ class MapViewController: UIViewController {
             print("Unknown")
         }
     }
+    
+    // MARK: - Map methods
+    
+    func initMapView() {
+        self.view.addSubview(mapView)
+        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        guard let initialLocation = locationManager.location else { return }
+        let center = initialLocation
+        let region = MKCoordinateRegion(
+            center: center.coordinate,
+            latitudinalMeters: 50000,
+            longitudinalMeters: 60000)
+        mapView.setCameraBoundary(
+            MKMapView.CameraBoundary(coordinateRegion: region),
+            animated: true)
+        
+        let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 50000)
+        mapView.setCameraZoomRange(zoomRange, animated: true)
+        
+    }
+    
     func centerMapToUserLocation() {
         if let userLocation = locationManager.location {
             mapView.centerToLocation(userLocation)
@@ -115,18 +155,29 @@ class MapViewController: UIViewController {
         
         guard let currentLocation = locationManager.location else { return }
         let pins = mapView.annotations.compactMap { $0 as? ScooterMarker }
-
+        var nearestDistance = Int.max
         let nearestPin: ScooterMarker? = pins.reduce((CLLocationDistanceMax, nil)) { (nearest, pin) in
             let coord = pin.coordinate
             let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
             let distance = currentLocation.distance(from: loc)
+            if Int(distance) < nearestDistance {
+                nearestDistance = Int(distance)
+            }
             return distance < nearest.0 ? (distance, pin) : nearest
         }.1
-        completion(nearestPin)
+        
+        if nearestDistance > 20000 {
+            completion(nil)
+        } else {
+            completion(nearestPin)
+        }
     }
     func selectNearestScooter() {
         self.selectNearestScooterMarker { [weak self] scooterMarker in
-            guard let self = self, let scooterMarker = scooterMarker else { return }
+            guard let self = self, let scooterMarker = scooterMarker else {
+                self?.viewModel.currentState?(.empty)
+                return
+            }
             self.drawRoute(distenation: scooterMarker.coordinate)
             self.showBottomSheet()
             self.bottomSheetViewController.loadScooterData(scooterMarker.scooterlayoutVM)
@@ -158,33 +209,11 @@ class MapViewController: UIViewController {
                 }
                 let route = response.routes[0]
                 self.mapView.addOverlay(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                
+                let mapRect = route.polyline.boundingMapRect
+                self.mapView.setVisibleMapRect(mapRect, animated: true)
             }
             
         }
-    }
-    func initMapView() {
-
-        let initialLocation = CLLocation(latitude: Constants.userLocationlat, longitude: Constants.userLocationlng)
-        let oahuCenter = initialLocation
-        let region = MKCoordinateRegion(
-            center: oahuCenter.coordinate,
-            latitudinalMeters: 50000,
-            longitudinalMeters: 60000)
-        mapView.setCameraBoundary(
-            MKMapView.CameraBoundary(coordinateRegion: region),
-            animated: true)
-        
-        let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 50000)
-        mapView.setCameraZoomRange(zoomRange, animated: true)
-        self.view.addSubview(mapView)
-//        mapView.translatesAutoresizingMaskIntoConstraints = false
-//        mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-//        mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-//        mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-//        mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7).isActive = true
-        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
     }
     
     func addScootersToMap(scooters: [ScooterMarkerLayoutViewModel]) {
@@ -193,20 +222,64 @@ class MapViewController: UIViewController {
         
     }
     
+    // MARK: - Reachability Method
+    
+    @objc func appBecomeActive() {
+            if NetworkMonitor.shared.isConnected {
+                DispatchQueue.main.async { [self] in
+                    hideError()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showError(error: .network)
+                }
+            }
+        }
+    func showEmptyStateBanner() {
+        let label = createLabelWith("No vehicle around here", alignment: .center, textColor: .black)
+        emptyStateView.backgroundColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.addSubview(label)
+        
+        label.topAnchor.constraint(equalTo: emptyStateView.topAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: emptyStateView.leadingAnchor, constant: 8).isActive = true
+        label.trailingAnchor.constraint(equalTo: emptyStateView.trailingAnchor, constant: -8).isActive = true
+        label.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor, constant: -8).isActive = true
+        
+        self.view.addSubview(emptyStateView)
+        emptyStateView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 200).isActive = true
+        emptyStateView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        emptyStateView.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        emptyStateView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    func hideEmptyStateBanner() {
+        if emptyStateView.superview != nil {
+            emptyStateView.removeFromSuperview()
+        }
+        
+    }
+    
 }
+
+// MARK: - FailableProtocol
 
 extension MapViewController: FailableProtocol {
+    
+    
     // There's a defualt implementation for different Error views, but If we need a custom ones for this viewController we could override them by building func showGeneralError(), func showNetworkError() here
     
-
+    
     
 }
+
+// MARK: - LoadableProtocol
 
 extension MapViewController: LoadableProtocol  {
     // There's a defualt implementation for loading view, but If we need a custom one for this viewController we could override it by building func showLoadingView() here
 }
 
-
+// MARK: - Bottom Sheet Methods
 extension MapViewController {
     
     func showBottomSheet() {
@@ -243,12 +316,13 @@ extension MapViewController {
 }
 
 
+// MARK: - Map delegate Methods
 
 extension MapViewController: MKMapViewDelegate {
     
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
+        
         guard let annotation = annotation as? ScooterMarker else {
             return nil
         }
@@ -267,20 +341,20 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let scooter = view.annotation as? ScooterMarker else {
             return
-          }
+        }
         showLoadingView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             self.mapView.removeOverlays(self.mapView.overlays)
             self.drawRoute(distenation: scooter.coordinate)
-              print(scooter)
+            print(scooter)
             self.bottomSheetViewController.loadScooterData(scooter.scooterlayoutVM)
             self.hideLoadingView()
         }
         
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-
+        
         if overlay.isKind(of: MKPolyline.self) {
             // draw the track
             let polyLine = overlay
@@ -288,16 +362,17 @@ extension MapViewController: MKMapViewDelegate {
             polyLineRenderer.strokeColor = UIColor.blue
             polyLineRenderer.lineDashPattern = [0, 6]
             polyLineRenderer.lineWidth = 2.0
-
+            
             return polyLineRenderer
         }
-
-
-
+        
+        
+        
         return MKPolylineRenderer()
     }
 }
 
+// MARK: - Location manager method
 
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
