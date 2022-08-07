@@ -6,29 +6,24 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum State {
     case loading(Bool)
     case recievedData([ScooterMarkerLayoutViewModel])
     case empty
     case error(Errortypes)
+    
+    
 }
 
 protocol MapViewModelProtocol {
-    var onLoading: ((_ isLoading: Bool) -> Void)? { get set }
-    var onEmptyState: (() -> Void)? { get set }
-    var onError: ((Errortypes) -> Void)? {get set }
-    var onRecieveData: (([ScooterMarkerLayoutViewModel]) -> Void)? { get set }
     var currentState: ((State)->Void)? {get set}
     func getNearScooters()
+    func getNearestPinFromUserLocation(pins: [ScooterMarker], currentLocation: CLLocation) -> ScooterMarker?
 }
 
 class MapViewModel: MapViewModelProtocol {
-    var onRecieveData: (([ScooterMarkerLayoutViewModel]) -> Void)?
-
-    var onLoading: ((Bool) -> Void)?
-    var onEmptyState: (() -> Void)?
-    var onError: ((Errortypes) -> Void)?
     
     var repository: MapDataRepositoryProtocol
     
@@ -38,6 +33,24 @@ class MapViewModel: MapViewModelProtocol {
         self.repository = repository
     }
     
+    func getNearestPinFromUserLocation(pins: [ScooterMarker], currentLocation: CLLocation) -> ScooterMarker? {
+        var nearestDistance = Int.max
+        let nearestPin: ScooterMarker? = pins.reduce((CLLocationDistanceMax, nil)) { (nearest, pin) in
+            let coord = pin.coordinate
+            let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+            let distance = currentLocation.distance(from: loc)
+            if Int(distance) < nearestDistance {
+                nearestDistance = Int(distance)
+            }
+            return distance < nearest.0 ? (distance, pin) : nearest
+        }.1
+        
+        if nearestDistance > 20000 {
+            return nil
+        } else {
+            return nearestPin
+        }
+    }
     
     func getNearScooters() {
         
@@ -50,11 +63,9 @@ class MapViewModel: MapViewModelProtocol {
                     if scooters.isEmpty {
                         self.currentState?(.empty)
                     } else {
-                        let layoutViewModel = scooters.map { ScooterMarkerLayoutViewModel($0) }
+                        let layoutViewModel = scooters.compactMap { ScooterMarkerLayoutViewModel($0) }
                         self.currentState?(.recievedData(layoutViewModel))
                     }
-                    
-                    
                 case .failure(let error):
                     self.currentState?(.error(error))
                     

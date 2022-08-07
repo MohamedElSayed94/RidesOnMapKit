@@ -17,7 +17,11 @@ protocol MapDataRepositoryProtocol {
 
 class MapDataRepository: MapDataRepositoryProtocol {
     
-    let service = MapService()
+    let service: MapServiceProtocol 
+    
+    init(service: MapServiceProtocol = MapService()) {
+        self.service = service
+    }
     func getNearScooters(completion: @escaping (Result<[ScooterModel], Errortypes>) -> Void) {
         service.getNearScooters { result in
             completion(result)

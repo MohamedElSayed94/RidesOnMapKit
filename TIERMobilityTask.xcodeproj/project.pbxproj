@@ -11,7 +11,6 @@
 		FA6C67D2289AB2AD001AE6CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67D1289AB2AD001AE6CC /* SceneDelegate.swift */; };
 		FA6C67D9289AB2AF001AE6CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6C67D8289AB2AF001AE6CC /* Assets.xcassets */; };
 		FA6C67DC289AB2AF001AE6CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6C67DA289AB2AF001AE6CC /* LaunchScreen.storyboard */; };
-		FA6C67E7289AB2AF001AE6CC /* TIERMobilityTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67E6289AB2AF001AE6CC /* TIERMobilityTaskTests.swift */; };
 		FA6C67F1289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67F0289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift */; };
 		FA6C67F3289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C67F2289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift */; };
 		FA6C6801289AB2EB001AE6CC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C6800289AB2EB001AE6CC /* MapViewController.swift */; };
@@ -31,6 +30,8 @@
 		FAC1FA7E289DDCC800C2915A /* HomeBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */; };
 		FAC1FA80289DE99300C2915A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */; };
 		FACD6260289EB7D300C9762A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD625F289EB7D300C9762A /* NetworkMonitor.swift */; };
+		FACD6264289F063E00C9762A /* MapRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD6263289F063E00C9762A /* MapRepositoryTests.swift */; };
+		FACD6266289F1E1B00C9762A /* MapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD6265289F1E1B00C9762A /* MapViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +59,6 @@
 		FA6C67DB289AB2AF001AE6CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6C67DD289AB2AF001AE6CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6C67E2289AB2AF001AE6CC /* TIERMobilityTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TIERMobilityTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA6C67E6289AB2AF001AE6CC /* TIERMobilityTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIERMobilityTaskTests.swift; sourceTree = "<group>"; };
 		FA6C67EC289AB2AF001AE6CC /* TIERMobilityTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TIERMobilityTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6C67F0289AB2AF001AE6CC /* TIERMobilityTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIERMobilityTaskUITests.swift; sourceTree = "<group>"; };
 		FA6C67F2289AB2AF001AE6CC /* TIERMobilityTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIERMobilityTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -79,6 +79,8 @@
 		FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetViewController.swift; sourceTree = "<group>"; };
 		FAC1FA7F289DE99300C2915A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FACD625F289EB7D300C9762A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		FACD6263289F063E00C9762A /* MapRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepositoryTests.swift; sourceTree = "<group>"; };
+		FACD6265289F1E1B00C9762A /* MapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +149,8 @@
 		FA6C67E5289AB2AF001AE6CC /* TIERMobilityTaskTests */ = {
 			isa = PBXGroup;
 			children = (
-				FA6C67E6289AB2AF001AE6CC /* TIERMobilityTaskTests.swift */,
+				FACD6263289F063E00C9762A /* MapRepositoryTests.swift */,
+				FACD6265289F1E1B00C9762A /* MapViewModelTests.swift */,
 			);
 			path = TIERMobilityTaskTests;
 			sourceTree = "<group>";
@@ -408,7 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6C67E7289AB2AF001AE6CC /* TIERMobilityTaskTests.swift in Sources */,
+				FACD6266289F1E1B00C9762A /* MapViewModelTests.swift in Sources */,
+				FACD6264289F063E00C9762A /* MapRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

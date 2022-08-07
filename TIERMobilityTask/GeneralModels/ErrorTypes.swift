@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum Errortypes: Error {
+enum Errortypes: Error, Equatable {
     case network
     case APIError(String?)
     case DecodeError(String?)

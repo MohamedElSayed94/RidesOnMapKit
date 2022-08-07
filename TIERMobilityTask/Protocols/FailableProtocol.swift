@@ -11,6 +11,7 @@ import UIKit
 
 protocol FailableProtocol {
     var topBannerErrorView: UIView {get set}
+    var retryButton: UIButton {get set}
     func showError(error: Errortypes)
     func showGeneralError(_ error: String?)
     func showNetworkError()
@@ -25,7 +26,7 @@ extension FailableProtocol where Self : UIViewController {
         case .network:
             showNetworkError()
         case .APIError(let error):
-            showGeneralError(error)
+            showErrorWithRetry(error)
         case .DecodeError(let error):
             showGeneralError(error)
         case .GeneralError(let error):
@@ -44,6 +45,28 @@ extension FailableProtocol where Self : UIViewController {
             self.hideError()
             self.showNetworkError()
         }
+    }
+    
+    func showErrorWithRetry(_ error: String?) {
+        hideError()
+        topBannerErrorView.backgroundColor = .blue
+        let label = createLabelWith(error, alignment: .center, textColor: .white)
+        createTopBannerErrorViewWith(label)
+        
+        retryButton.setTitle("Retry", for: .normal)
+        retryButton.titleLabel?.font = .systemFont(ofSize: 10)
+        retryButton.layer.cornerRadius = 5
+        retryButton.setImage(UIImage(systemName: "arrow.counterclockwise"), for: .normal)
+        retryButton.tintColor = .white
+        retryButton.backgroundColor = .blue
+        self.view.addSubview(retryButton)
+        retryButton.translatesAutoresizingMaskIntoConstraints = false
+        retryButton.topAnchor.constraint(equalTo: topBannerErrorView.bottomAnchor, constant: 10).isActive = true
+        retryButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        retryButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        retryButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        
     }
     
     func showNetworkError() {

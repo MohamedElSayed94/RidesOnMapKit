@@ -15,14 +15,12 @@ class ScooterMarker: NSObject, MKAnnotation {
     let subTitle: String?
     let coordinate: CLLocationCoordinate2D
     let scooterlayoutVM: ScooterMarkerLayoutViewModel
-    init?(scooter: ScooterMarkerLayoutViewModel) {
+    init(scooter: ScooterMarkerLayoutViewModel) {
         
-        guard let lat = scooter.lat, let lng = scooter.lng else {
-            return nil
-        }
+        
         self.title = scooter.vehicleType
         self.subTitle = "\(scooter.batteryLevel), \(scooter.maxSpeed)"
-        self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        self.coordinate = CLLocationCoordinate2D(latitude: scooter.lat, longitude: scooter.lng)
         self.scooterlayoutVM = scooter
         super.init()
     }

@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 
 
+protocol MapServiceProtocol {
+    func getNearScooters( completion: @escaping (Result<[ScooterModel], Errortypes>) -> Void)
+}
 
-class MapService {
+
+class MapService: MapServiceProtocol {
     
     func getNearScooters( completion: @escaping (Result<[ScooterModel], Errortypes>) -> Void) {
         let baseUrl = Constants.URL.baseUrl

@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
     
     var topBannerErrorView: UIView = UIView()
     let emptyStateView = UIView()
+    var retryButton: UIButton = UIButton()
     var bottomSheetViewController: HomeBottomSheetViewController
     var loadingViewController: UIViewController = SpinnerViewController()
     var mapView: MKMapView
@@ -61,7 +62,6 @@ class MapViewController: UIViewController {
                     self.hideEmptyStateBanner()
                     self.addScootersToMap(scooters: scooters)
                     self.selectNearestScooter()
-                    
                 case .empty:
                     print("Empty")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -77,6 +77,7 @@ class MapViewController: UIViewController {
         
         NetworkMonitor.shared.startMonitoring()
         NotificationCenter.default.addObserver(self, selector: #selector(appBecomeActive), name: NSNotification.Name(rawValue: "connectionType"), object: nil)
+        retryButton.addTarget(self, action: #selector(retryButtonAction), for: .touchUpInside)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -118,7 +119,9 @@ class MapViewController: UIViewController {
             
             mapView.showsUserLocation = true
             centerMapToUserLocation()
-            selectNearestScooter()
+            if loadingViewController.isBeingDismissed {
+                selectNearestScooter()
+            }
         @unknown default:
             print("Unknown")
         }
@@ -155,22 +158,8 @@ class MapViewController: UIViewController {
         
         guard let currentLocation = locationManager.location else { return }
         let pins = mapView.annotations.compactMap { $0 as? ScooterMarker }
-        var nearestDistance = Int.max
-        let nearestPin: ScooterMarker? = pins.reduce((CLLocationDistanceMax, nil)) { (nearest, pin) in
-            let coord = pin.coordinate
-            let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
-            let distance = currentLocation.distance(from: loc)
-            if Int(distance) < nearestDistance {
-                nearestDistance = Int(distance)
-            }
-            return distance < nearest.0 ? (distance, pin) : nearest
-        }.1
-        
-        if nearestDistance > 20000 {
-            completion(nil)
-        } else {
-            completion(nearestPin)
-        }
+        let nearestPin = viewModel.getNearestPinFromUserLocation(pins: pins, currentLocation: currentLocation)
+        completion(nearestPin)
     }
     func selectNearestScooter() {
         self.selectNearestScooterMarker { [weak self] scooterMarker in
@@ -235,6 +224,7 @@ class MapViewController: UIViewController {
                 }
             }
         }
+    // MARK: - showEmptyStateBanner
     func showEmptyStateBanner() {
         let label = createLabelWith("No vehicle around here", alignment: .center, textColor: .black)
         emptyStateView.backgroundColor = .white
@@ -253,6 +243,7 @@ class MapViewController: UIViewController {
         emptyStateView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         emptyStateView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
     func hideEmptyStateBanner() {
         if emptyStateView.superview != nil {
             emptyStateView.removeFromSuperview()
@@ -260,6 +251,13 @@ class MapViewController: UIViewController {
         
     }
     
+    // MARK: - retryButtonAction Method
+    
+    @objc func retryButtonAction() {
+        mapView.annotations.forEach { mapView.removeAnnotation($0) }
+        mapView.overlays.forEach { mapView.removeOverlay($0) }
+        viewModel.getNearScooters()
+    }
 }
 
 // MARK: - FailableProtocol
@@ -283,6 +281,7 @@ extension MapViewController: LoadableProtocol  {
 extension MapViewController {
     
     func showBottomSheet() {
+        hideBottomSheet()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.addChild(self.bottomSheetViewController)
@@ -295,7 +294,7 @@ extension MapViewController {
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self = self else { return }
                 let frame = self.bottomSheetViewController.view.frame
-                let yComponent = self.mapView.frame.height * 0.7 - 50
+                let yComponent = self.view.frame.height * 0.7 - 30
                 let newHeight = height - yComponent
                 self.bottomSheetViewController.view.frame = CGRect(x: 0, y: yComponent, width: frame.width, height: newHeight)
                 
@@ -306,9 +305,12 @@ extension MapViewController {
     }
     
     func hideBottomSheet() {
-        bottomSheetViewController.willMove(toParent: nil)
-        bottomSheetViewController.view.removeFromSuperview()
-        bottomSheetViewController.removeFromParent()
+        if !bottomSheetViewController.isBeingDismissed {
+            bottomSheetViewController.willMove(toParent: nil)
+            bottomSheetViewController.view.removeFromSuperview()
+            bottomSheetViewController.removeFromParent()
+        }
+        
     }
     
     
