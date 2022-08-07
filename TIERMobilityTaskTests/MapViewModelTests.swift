@@ -22,6 +22,8 @@ class MapViewModelTests: XCTestCase {
     func testGetNearestPinFromUserLocation() throws {
         ViewModel = MapViewModel()
         
+        let nearUserLocation = CLLocation(latitude: 52.501232, longitude: 13.44)
+        
         let realNearstScooter = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "1", attributes: ScooterModel.Attribute(batteryLevel: 40, hasHelmetBox: false, lat: 52.498131, lng: 13.443343, maxSpeed: 20, vehicleType: "Scooter")))!)
         let scooter2 = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "2", attributes: ScooterModel.Attribute(batteryLevel: 70, hasHelmetBox: false, lat: 52.498856, lng: 13.447655, maxSpeed: 20, vehicleType: "Scooter")))!)
         let scooter3 = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "3", attributes: ScooterModel.Attribute(batteryLevel: 70, hasHelmetBox: false, lat: 52.501231, lng: 13.432566, maxSpeed: 20, vehicleType: "Scooter")))!)
@@ -29,13 +31,27 @@ class MapViewModelTests: XCTestCase {
         scooterArr.append(realNearstScooter)
         scooterArr.append(scooter2)
         scooterArr.append(scooter3)
-        let calculatedNearestMarker = ViewModel?.getNearestPinFromUserLocation(pins: scooterArr, currentLocation: CLLocation(latitude: 52.501232, longitude: 13.44))
+        let calculatedNearestMarker = ViewModel?.getNearestPinFromUserLocation(pins: scooterArr, currentLocation: nearUserLocation)
         XCTAssertTrue(calculatedNearestMarker?.scooterlayoutVM.id == "1")
         XCTAssertFalse(calculatedNearestMarker?.scooterlayoutVM.id == "2")
         XCTAssertFalse(calculatedNearestMarker?.scooterlayoutVM.id == "3")
         
     }
 
-    
-
+    func testGetNearestPinFromUserLocationNoVehicleAround() throws {
+        ViewModel = MapViewModel()
+        
+        let farUserLocation = CLLocation(latitude: 26.8206, longitude: 30.8025)
+        
+        let scooter1 = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "1", attributes: ScooterModel.Attribute(batteryLevel: 40, hasHelmetBox: false, lat: 52.498131, lng: 13.443343, maxSpeed: 20, vehicleType: "Scooter")))!)
+        let scooter2 = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "2", attributes: ScooterModel.Attribute(batteryLevel: 70, hasHelmetBox: false, lat: 52.498856, lng: 13.447655, maxSpeed: 20, vehicleType: "Scooter")))!)
+        let scooter3 = ScooterMarker(scooter: ScooterMarkerLayoutViewModel(ScooterModel(type: "", id: "3", attributes: ScooterModel.Attribute(batteryLevel: 70, hasHelmetBox: false, lat: 52.501231, lng: 13.432566, maxSpeed: 20, vehicleType: "Scooter")))!)
+        var scooterArr = [ScooterMarker]()
+        scooterArr.append(scooter1)
+        scooterArr.append(scooter2)
+        scooterArr.append(scooter3)
+        let calculatedNearestMarker = ViewModel?.getNearestPinFromUserLocation(pins: scooterArr, currentLocation: farUserLocation)
+        
+        XCTAssertNil(calculatedNearestMarker)
+    }
 }
