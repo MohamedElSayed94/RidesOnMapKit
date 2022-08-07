@@ -26,6 +26,6 @@ class ScooterMarker: NSObject, MKAnnotation {
     }
     var subtitle: String? {
         return subTitle
-      }
+    }
 }
 

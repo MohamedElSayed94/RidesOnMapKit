@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeBottomSheetViewController: UIViewController {
-
+    
     
     var mainstackview: UIStackView = {
         let stackView = UIStackView()
@@ -49,7 +49,7 @@ class HomeBottomSheetViewController: UIViewController {
         self.view.layoutIfNeeded()
         
     }
-
     
-
+    
+    
 }

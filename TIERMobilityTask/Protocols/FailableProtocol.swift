@@ -19,7 +19,7 @@ protocol FailableProtocol {
 }
 
 extension FailableProtocol where Self : UIViewController {
-
+    
     func showError(error: Errortypes) {
         
         switch error {
@@ -95,7 +95,7 @@ extension FailableProtocol where Self : UIViewController {
         label.trailingAnchor.constraint(equalTo: topBannerErrorView.trailingAnchor, constant: -8).isActive = true
         label.bottomAnchor.constraint(equalTo: topBannerErrorView.bottomAnchor, constant: -8).isActive = true
     }
-
+    
     func hideError() {
         if topBannerErrorView.superview != nil {
             topBannerErrorView.removeFromSuperview()

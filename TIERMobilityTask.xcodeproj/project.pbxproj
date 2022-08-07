@@ -167,10 +167,9 @@
 		FA6C67FF289AB2B9001AE6CC /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				FA6C6800289AB2EB001AE6CC /* MapViewController.swift */,
-				FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */,
-				FAC1FA73289BF75700C2915A /* ScooterModel.swift */,
-				FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */,
+				FACD6269289F4DB200C9762A /* Model */,
+				FACD6268289F4DA700C9762A /* ViewModel */,
+				FACD6267289F4DA200C9762A /* View */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -253,6 +252,31 @@
 				FAC1FA7D289DDCC800C2915A /* HomeBottomSheetViewController.swift */,
 			);
 			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		FACD6267289F4DA200C9762A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA6C6800289AB2EB001AE6CC /* MapViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FACD6268289F4DA700C9762A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA7A289DD47800C2915A /* ScooterMarkerLayoutViewModel.swift */,
+				FA6C6803289AB3E5001AE6CC /* MapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FACD6269289F4DB200C9762A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1FA73289BF75700C2915A /* ScooterModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

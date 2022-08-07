@@ -214,16 +214,16 @@ class MapViewController: UIViewController {
     // MARK: - Reachability Method
     
     @objc func appBecomeActive() {
-            if NetworkMonitor.shared.isConnected {
-                DispatchQueue.main.async { [self] in
-                    hideError()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.showError(error: .network)
-                }
+        if NetworkMonitor.shared.isConnected {
+            DispatchQueue.main.async { [self] in
+                hideError()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showError(error: .network)
             }
         }
+    }
     // MARK: - showEmptyStateBanner
     func showEmptyStateBanner() {
         let label = createLabelWith("No vehicle around here", alignment: .center, textColor: .black)
